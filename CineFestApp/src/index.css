@@ -1,1 +1,15 @@
 @import "tailwindcss";
+@import "@fontsource/pacifico";
+
+@theme {
+    --color-primary: #E50914;
+    --color-secondary: #FFFFFF;
+    --color-midnight: #0D0D0D;
+
+    --font-disney: 'Pacifico', cursive;
+    --font-sans: ["Inter", "Arial", "sans-serif"]
+}
+
+/* *{
+    background-color: var(--color-midnight);
+} */
