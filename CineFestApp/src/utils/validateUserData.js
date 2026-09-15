@@ -90,7 +90,7 @@ let errorObj = {
 if(email.length === 0){
     errorObj.isAnyValidationError = true;
     errorObj.email = "Email Address is required.";
-}else if(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)){
+}else if(!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)){
     errorObj.isAnyValidationError = true;
     errorObj.email = "Email Address is Invalid.";
 }
