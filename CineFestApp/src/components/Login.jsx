@@ -5,7 +5,6 @@ import { validateSignUpFormData, validateSignInFormData } from "../utils/validat
 
 import { auth } from "../utils/firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import toast from 'react-hot-toast';
@@ -25,7 +24,7 @@ const Login = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   //At the time of toggle we need to refresh our page and there must be no error no data in the fields.
   function refreshFormFields() {
 
@@ -98,7 +97,7 @@ const Login = () => {
         // console.log(user);
 
         toast.success(toastMessage("signup",true));
-        navigate("/browse");
+        // navigate("/browse");
 
       })
       .catch((error) => {
@@ -120,7 +119,7 @@ const Login = () => {
 
 
         toast.success(toastMessage("signin", true));
-        navigate("/browse");
+        // navigate("/browse");
 
       })
       .catch((error) => {

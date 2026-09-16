@@ -1,29 +1,28 @@
 import toast from "react-hot-toast";
 import logo from "../assets/logo.png";
 import { USER_LOGO_URL } from "../utils/constant";
-import { useSelector } from "react-redux";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { toastMessage } from "../utils/toasts";
 
+import useAuthFlowHandler from "../utils/customHooks/useAuthFlowHandler";
+
 
 const Header = () => {
   const [showUserProfileMenu, setShowUserProfileMenu] = useState(false);
-  const userDetail = useSelector(appStore => appStore.user);
-  toast(JSON.stringify(userDetail));
   const location = useLocation();
-  const navigate = useNavigate();
-
   const isLoginPage = location.pathname === "/";
+
+  //This hook is created to handle user detail addition to redux store and redirection on the basis of if sign in or not.
+  useAuthFlowHandler();
 
    const handleSignOut = () => {
     signOut(auth).then(() => {
         toast.success(toastMessage("signout",true));
-        navigate("/");
     }).catch((error) => {
         toast.error(toastMessage("signout",false));
     });
@@ -34,7 +33,7 @@ const Header = () => {
       initial={{ opacity: 0, y: -30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="absolute inset-x-0 top-0 z-10 px-8 py-6 sm:px-12 bg-linear-to-b from-black flex justify-between"
+      className="absolute inset-x-0 top-0 z-20 px-8 py-6 sm:px-12 bg-linear-to-b from-black flex justify-between"
     >
       <div className="flex items-center">
 
@@ -46,7 +45,7 @@ const Header = () => {
       </div>
 
         {
-          (userDetail !== null && !isLoginPage)?
+          (!isLoginPage)?
           <div>
             <div onClick={() => { setShowUserProfileMenu(!showUserProfileMenu)}} className="relative flex flex-col items-center w-full">
               <img src={USER_LOGO_URL} className="w-2/5 rounded-xl outline-0 hover:outline-2 hover:outline-primary mb-5"/>
