@@ -3,14 +3,14 @@ import { motion } from "framer-motion";
 
 const VideoTitle = ({ title, overview, rating }) => {
   return (
-    <motion.div className='absolute z-10 w-full h-full flex items-center text-white' initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6, ease: "easeOut", delay: 0.7 }}>
+    <motion.div className='absolute z-10 w-full h-screen flex items-center text-white' initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6, ease: "easeOut", delay: 0.7 }}>
         
         <div className='flex w-full px-20 pt-40'>
 
             {/* Left side of title */}
             <div className='flex w-1/3 flex-col gap-5'>
-                <h2 className='text-5xl font-bold font-disney'>{title}</h2>
-                <p className='text-md font-serif'>{overview}</p>
+                <h2 className='text-xl md:text-5xl font-bold font-disney'>{title}</h2>
+                <p className='text-sm md:text-md  font-serif'>{overview}</p>
                 <div className='flex gap-5'>
                     
                     <motion.button
