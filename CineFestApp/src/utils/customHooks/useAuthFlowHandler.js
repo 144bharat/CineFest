@@ -26,6 +26,7 @@ const useAuthFlowHandler = () => {
                 };
 
                 dispatch(addUser(userDetail));
+                
                 navigate("/browse");
             } else {
                 // User is signed out

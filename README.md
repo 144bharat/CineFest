@@ -1,12 +1,12 @@
 # CineFest
-Movie streaming platform with React, Redux Toolkit, Tailwind CSS, Firebase Authentication, and ChatGPT AI recommendations.
+Movie streaming platform with React, Redux Toolkit, Tailwind CSS, Firebase Authentication, and Gemini AI recommendations.
 
 ## Features
 
 * User authentication with Firebase
 * Browse and search movies
 * Stream movies and videos
-* AI-powered movie recommendations using ChatGPT
+* AI-powered movie recommendations using GEMINI API.
 * Responsive UI
 * State management with Redux Toolkit
 * Unit and integration testing with React Testing Library
@@ -17,7 +17,7 @@ Movie streaming platform with React, Redux Toolkit, Tailwind CSS, Firebase Authe
 * Redux Toolkit
 * Tailwind CSS
 * Firebase Authentication
-* ChatGPT API
+* GEMINI API
 * React Testing Library
 
 
@@ -35,4 +35,4 @@ Movie streaming platform with React, Redux Toolkit, Tailwind CSS, Firebase Authe
             - MovieLists (N Number of Movies)
 * CineFest Recommendation Page:
     - Search Bar
-    - Movie Suggestions with chat gpt api.
+    - Movie Suggestions with gemini api.

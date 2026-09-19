@@ -3,18 +3,13 @@ import Header from "./Header";
 import { useSelector } from "react-redux";
 import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
+import AISearchPage from "./AISearchPage";
 
 const Browse = () => {
 
 //This hook is created to handle now playing movies fetch directly from TMDB api and add them into redux store.
     useNowPlayingMovies();
-
-    const nowPlayingMoviesLisst = useSelector(appStore => appStore.movies.nowPlayingMovies);
-
-    if(nowPlayingMoviesLisst !== null){
-        // console.log(nowPlayingMoviesLisst);
-    }
-
+  const isShowSearchPage = useSelector(store => store.ai.isShowSearchPage);
     return (
         <div>
             <Header />
@@ -29,10 +24,13 @@ const Browse = () => {
                      - In Form Of Cards
 
             */}
-            
-            <MainContainer />
-            <SecondaryContainer />
-
+            {
+                isShowSearchPage? <AISearchPage /> : 
+                    <>
+                        <MainContainer />
+                        <SecondaryContainer />
+                    </>
+            }
         </div>
     )
 }

@@ -10,11 +10,15 @@ import { auth } from "../utils/firebase";
 import { toastMessage } from "../utils/toasts";
 
 import useAuthFlowHandler from "../utils/customHooks/useAuthFlowHandler";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleAISearchPage } from "../utils/Slices/AISlice";
 
 
 const Header = () => {
   const [showUserProfileMenu, setShowUserProfileMenu] = useState(false);
   const location = useLocation();
+  const dispatch = useDispatch();
+  const isShowSearchPage = useSelector(store => store.ai.isShowSearchPage);
   const isLoginPage = location.pathname === "/";
 
   //This hook is created to handle user detail addition to redux store and redirection on the basis of if sign in or not.
@@ -28,6 +32,9 @@ const Header = () => {
     });
    }
 
+   const handleToggleAISearch = () => {
+     dispatch(toggleAISearchPage(isShowSearchPage));
+   }
   return (
     <motion.header
       initial={{ opacity: 0, y: -30 }}
@@ -35,10 +42,10 @@ const Header = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="absolute inset-x-0 top-0 z-20 px-8 py-6 sm:px-12 bg-linear-to-b from-black flex justify-between"
     >
-      <div className="flex items-center">
+      <div className="flex items-end">
 
-        <img src={logo} alt="Cine Fest logo" className="w-18 sm:w-22" />
-        <h1 className="ml-2 text-3xl font-disney text-primary sm:text-4xl">
+        <img src={logo} alt="Cine Fest logo" className="w-18" />
+        <h1 className="ml-2 font-extrabold font-disney text-primary sm:text-3xl">
           Cine Fest
         </h1>
 
@@ -46,9 +53,10 @@ const Header = () => {
 
         {
           (!isLoginPage)?
-          <div>
-            <div onClick={() => { setShowUserProfileMenu(!showUserProfileMenu)}} className="relative flex flex-col items-center w-full">
-              <img src={USER_LOGO_URL} className="w-2/5 rounded-xl outline-0 hover:outline-2 hover:outline-primary mb-5"/>
+          <div className="flex items-center justify-center py-2">
+            <button className="bg-emerald-600 text-white w-6/6 h-full rounded-lg cursor-pointer hover:bg-emerald-800" onClick={() => {handleToggleAISearch()}}>{isShowSearchPage?"Home": "Go To AI Search"}</button>
+            <div onClick={() => { setShowUserProfileMenu(!showUserProfileMenu)}} className="relative flex flex-col items-center w-full h-full">
+              <img src={USER_LOGO_URL} className="w-2/5 h-full place-self-center rounded-xl outline-0 hover:outline-2 hover:outline-primary"/>
                 <AnimatePresence>
                 
                   {(showUserProfileMenu)? 

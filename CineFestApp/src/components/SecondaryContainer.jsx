@@ -19,8 +19,6 @@ const SecondaryContainer = () => {
   if(nowPlayingMovies === null){
     return;
   }
-  
-  console.log(nowPlayingMovies);
   return (
     <div className="bg-black/90">
       <div className="-mt-64 relative z-5">

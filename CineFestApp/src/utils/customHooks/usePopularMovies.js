@@ -11,8 +11,6 @@ const dispatch = useDispatch();
         const data = await popularMoviesDataStream.json();
         
         dispatch(addPopularMovies(data.results));
-        
-        // console.log(data.results);
     }
 
     useEffect(() => {

@@ -11,6 +11,13 @@ const VideoTitle = ({ title, overview, rating }) => {
             <div className='flex w-1/3 flex-col gap-5'>
                 <h2 className='text-xl md:text-5xl font-bold font-disney'>{title}</h2>
                 <p className='text-sm md:text-md  font-serif'>{overview}</p>
+
+                <p className='text-lg font-bold font-disney flex items-center gap-2'>
+                    <span className='pr-5'>Rated:</span> 
+                    {Math.round((rating*10))/10}
+                    <Star className='w-6 h-6 fill-yellow-300 stroke-yellow-400' />
+                </p>
+
                 <div className='flex gap-5'>
                     
                     <motion.button
@@ -31,12 +38,12 @@ const VideoTitle = ({ title, overview, rating }) => {
             </div>
 
             {/* Right side of title */}
-            <div className='flex w-2/3 justify-end items-center'>
+            {/* <div className='flex w-2/3 justify-end items-center'>
                 <p className='text-lg font-bold font-disney flex items-center gap-2'>
                     {Math.round((rating*10))/10}
                     <Star className='w-6 h-6 fill-yellow-300 stroke-yellow-400' />
                 </p>
-            </div>
+            </div> */}
         </div>
 
     </motion.div>

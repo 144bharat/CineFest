@@ -8,10 +8,6 @@ const MainContainer = () => {
   if(nowPlayingMovies === null) return;
   
   const mainMovie = nowPlayingMovies[0];
-  
-  // console.log("Inside Main Container:");
-  // console.log(mainMovie);
-
   const {original_title, overview, vote_average, id } = mainMovie;
 
   return (

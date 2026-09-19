@@ -11,8 +11,6 @@ const useNowPlayingMovies = () => {
         const nowPlayingDataStream = await fetch('https://api.themoviedb.org/3/movie/now_playing?page=4', TMDB_API_OPTIONS);
         const data = await nowPlayingDataStream.json();
 
-        // console.log(data.results);
-
         dispatch(addNowPlayingMovies(data.results));
     }
 
