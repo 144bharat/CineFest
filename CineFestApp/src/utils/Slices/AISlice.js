@@ -4,17 +4,34 @@ const AISlice = createSlice({
     name:"ai",
     initialState: {
         isShowSearchPage: false,
-        recommendedMovieList: null
+        // aiResponseMovieNameList: null,
+        // recommendedMovieList: null,
+
+        recommendedMoviesListData: [
+            {
+                aiMovieTitle: null,
+                tmdbProvidedMovieList:[]
+            }
+        ]
     },
     reducers: {
         toggleAISearchPage: (state, action) => {
             state.isShowSearchPage = !state.isShowSearchPage;
         },
-        addRecommendedMovieList: (state, action) => {
-            state.recommendedMovieList = action.payload;
+        // addAIResponseMovieNameList: (state, action) => {
+        //     state.aiResponseMovieNameList = action.payload;
+        // },
+        // addRecommendedMovieList: (state, action) => {
+        //     state.recommendedMovieList = action.payload;
+        // },
+        addRecommendedMoviesListData: (state, action) => {
+            state.recommendedMoviesListData.push(action.payload);
+        },
+        emptyRecommendedMoviesListData: (state, action) => {
+            state.recommendedMoviesListData.length = 0;
         }
     }
 });
 
-export const { toggleAISearchPage, addRecommendedMovieList } = AISlice.actions;
+export const { toggleAISearchPage, addAIResponseMovieNameList, addRecommendedMovieList, addRecommendedMoviesListData, emptyRecommendedMoviesListData } = AISlice.actions;
 export default AISlice.reducer;

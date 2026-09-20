@@ -4,7 +4,7 @@ import { useState } from "react";
 import { searchMoviesWithAI } from "../utils/gemini";
 import { TMDB_API_OPTIONS } from "../utils/constant";
 import { useDispatch } from "react-redux";
-import { addRecommendedMovieList } from "../utils/Slices/AISlice";
+import { addRecommendedMoviesListData, emptyRecommendedMoviesListData } from "../utils/Slices/AISlice"; //addAIResponseMovieNameList, addRecommendedMovieList, 
 
 const AISearchBar = () => {
 
@@ -18,7 +18,12 @@ const AISearchBar = () => {
   const fetchTMDBMovieByMovieName = async (movieName) => {
       const dataStream = await fetch('https://api.themoviedb.org/3/search/movie?query='+ movieName +'&include_adult=false&page=1', TMDB_API_OPTIONS);
       const data = await dataStream.json();
-      return data;
+      //return data;
+
+      dispatch(addRecommendedMoviesListData({
+        aiMovieTitle: movieName,
+        tmdbProvidedMovieList: data?.results
+      }))
   }
 
   const handleSearch = async () => {
@@ -27,20 +32,19 @@ const AISearchBar = () => {
     setIsSearching(true);
     
     try {
-      const aiSuggestions = await searchMoviesWithAI(searchText);
-      // console.log("RECOMMENDED: ");
-      // console.log(aiSuggestions);
 
-      // console.log("recommendedMovieList: ");
-      const movieArrayInFormOfPromise = aiSuggestions.map(movieName => fetchTMDBMovieByMovieName(movieName));
-      //console.log(movieArrayInFormOfPromise); //[Promise, Promise, Promise, Promise, Promise];
+      dispatch(emptyRecommendedMoviesListData());
+      const aiSuggestions = await searchMoviesWithAI(searchText);
+
+      //dispatch(addAIResponseMovieNameList(aiSuggestions));
+
+      //const movieArrayInFormOfPromise = aiSuggestions.map(movieName => fetchTMDBMovieByMovieName(movieName));
+      aiSuggestions.map(movieName => fetchTMDBMovieByMovieName(movieName));
 
       //Now I need to use Promise.all(movieArrayInFormOfPromise); // When all resolve then only move ahead and provide data.
-
-      const recommendedMovieList = await Promise.all(movieArrayInFormOfPromise);
-      // console.log(recommendedMovieList);
+      //const recommendedMovieList = await Promise.all(movieArrayInFormOfPromise);
       
-      dispatch(addRecommendedMovieList(recommendedMovieList));
+      //dispatch(addRecommendedMovieList(recommendedMovieList));
 
       setIsErrorOccuredFromAi(false);
       setIsSearching(false);
