@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import logo from "../assets/logo.png";
-import { USER_LOGO_URL } from "../utils/constant";
+import { USER_LOGO_URL, SUPPORTEDLANGUAGES } from "../utils/constant";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -11,8 +11,7 @@ import { toastMessage } from "../utils/toasts";
 
 import useAuthFlowHandler from "../utils/customHooks/useAuthFlowHandler";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleAISearchPage } from "../utils/Slices/AISlice";
-
+import { toggleAISearchPage, updateLanguage } from "../utils/Slices/AISlice";
 
 const Header = () => {
   const [showUserProfileMenu, setShowUserProfileMenu] = useState(false);
@@ -35,6 +34,12 @@ const Header = () => {
    const handleToggleAISearch = () => {
      dispatch(toggleAISearchPage(isShowSearchPage));
    }
+
+   const handleLangChange = (event) => {
+    const selectedLanguage = event.target.value;
+    dispatch(updateLanguage(selectedLanguage));
+   }
+
   return (
     <motion.header
       initial={{ opacity: 0, y: -30 }}
@@ -53,7 +58,19 @@ const Header = () => {
 
         {
           (!isLoginPage)?
-          <div className="flex items-center justify-center py-2">
+          <div className="flex items-center justify-center py-2 gap-5">
+
+            {
+            isShowSearchPage &&
+            <select onChange={(event) => handleLangChange(event)} className="bg-midnight text-white w-6/6 h-full rounded-lg cursor-pointer hover:bg-midnight/70">
+              {
+                SUPPORTEDLANGUAGES.map((language) => (
+                  <option key={language.identifier} value={language.identifier}>{language.name}</option>
+                ))
+              }
+            </select>
+            }
+
             <button className="bg-emerald-600 text-white w-6/6 h-full rounded-lg cursor-pointer hover:bg-emerald-800" onClick={() => {handleToggleAISearch()}}>{isShowSearchPage?"Home": "Go To AI Search"}</button>
             <div onClick={() => { setShowUserProfileMenu(!showUserProfileMenu)}} className="relative flex flex-col items-center w-full h-full">
               <img src={USER_LOGO_URL} className="w-2/5 h-full place-self-center rounded-xl outline-0 hover:outline-2 hover:outline-primary"/>

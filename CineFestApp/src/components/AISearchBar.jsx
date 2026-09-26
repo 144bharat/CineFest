@@ -6,7 +6,12 @@ import { TMDB_API_OPTIONS } from "../utils/constant";
 import { useDispatch } from "react-redux";
 import { addRecommendedMoviesListData, emptyRecommendedMoviesListData } from "../utils/Slices/AISlice"; //addAIResponseMovieNameList, addRecommendedMovieList, 
 
+import { useSelector } from "react-redux";
+import { lang } from "../utils/language";
+
 const AISearchBar = () => {
+
+  const langKey = useSelector(store => store.ai.language);
 
   const [isFocused, setIsFocused] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
@@ -86,7 +91,7 @@ const AISearchBar = () => {
       >
         <input
           type="text"
-          placeholder="Smart movie suggestions: let’s find a film..."
+          placeholder={lang[langKey].aiSearchPlaceholder}
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
           onFocus={() => setIsFocused(true)}
@@ -120,7 +125,8 @@ const AISearchBar = () => {
             Searching...
           </motion.span>
         ) : (
-          "Search"
+          lang[langKey].search
+
         )}
       </motion.button>
     </motion.div>

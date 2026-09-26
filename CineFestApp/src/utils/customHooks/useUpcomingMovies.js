@@ -1,5 +1,5 @@
 import { addUpcomingMovies } from "../Slices/moviesSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { TMDB_API_OPTIONS } from "../constant";
 
@@ -20,7 +20,7 @@ const getUpcomingMoviesList = useSelector((state) => state.movies.upcomingMovies
         if(!getUpcomingMoviesList) {
             getUpcomingMovies();
         }
-        
+
     },[]);
 
 

@@ -12,7 +12,8 @@ const AISlice = createSlice({
                 aiMovieTitle: null,
                 tmdbProvidedMovieList:[]
             }
-        ]
+        ],
+        language: "en",
     },
     reducers: {
         toggleAISearchPage: (state, action) => {
@@ -29,9 +30,12 @@ const AISlice = createSlice({
         },
         emptyRecommendedMoviesListData: (state, action) => {
             state.recommendedMoviesListData.length = 0;
+        },
+        updateLanguage: (state, action) => {
+            state.language = action.payload; // IN CASE OF LANGUAGE CHANGE
         }
     }
 });
 
-export const { toggleAISearchPage, addAIResponseMovieNameList, addRecommendedMovieList, addRecommendedMoviesListData, emptyRecommendedMoviesListData } = AISlice.actions;
+export const { toggleAISearchPage, addAIResponseMovieNameList, addRecommendedMovieList, addRecommendedMoviesListData, emptyRecommendedMoviesListData, updateLanguage } = AISlice.actions;
 export default AISlice.reducer;
